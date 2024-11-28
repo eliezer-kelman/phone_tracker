@@ -78,7 +78,7 @@ def find_device_by_id(device_id: str) -> Maybe[Device]:
         parameters = {"id": device_id}
         result = session.run(query, parameters).single()
         if result is None or result.get('d') is None:
-            return Maybe.from_value(None)
+            return Maybe.from_value(None).map(lambda _: None)
         return convert_utils.create_device_from_data(result.get('d'))
 
 
